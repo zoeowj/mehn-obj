@@ -1,0 +1,302 @@
+{{#section 'head'}}
+    <link rel="stylesheet" href="./vendor/datatables.net/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="./stylesheets/blogs.css">
+{{/section}}
+
+<section class="content">
+    <table id="blogExample"
+           class="table table-striped table-bordered"
+           cellspacing="0"
+           width="100%">
+    </table>
+</section>
+<!-- 编辑模态框 -->
+<section>
+    <section class="container">
+        <div id="editModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="gridSystemModalLabel">编辑</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal"
+                              name="editForm"
+                              id="editForm"
+                        >
+                            <div class="form-group">
+                                <label for="" class="col-sm-offset-1 col-sm-2 control-label">标题</label>
+                                <div class="col-sm-7">
+                                    <input type="text"
+                                           name="title"
+                                           class="form-control"
+                                           id="editTitle"
+                                           placeholder="标题"
+                                           required
+                                    >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-offset-1 col-sm-2 control-label">内容</label>
+                                <div class="col-sm-7">
+                                    <input type="text"
+                                           name="content"
+                                           class="form-control"
+                                           id="editContent"
+                                           placeholder="内容"
+                                    >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-offset-1 col-sm-2 control-label">作者</label>
+                                <div class="col-sm-7">
+                                    <input type="text"
+                                           name="author"
+                                           class="form-control"
+                                           id="editAuthor"
+                                           placeholder="作者"
+                                           required
+                                    >
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="" class="col-sm-offset-1 col-sm-2 control-label">评论</label>
+                                <div class="col-sm-7">
+                                    <input type="text"
+                                           name="comment"
+                                           class="form-control"
+                                           id="editComment"
+                                           placeholder="评论"
+                                    >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-offset-1 col-sm-2 control-label">点赞</label>
+                                <div class="col-sm-7">
+                                    <input type="text"
+                                           name="like"
+                                           class="form-control"
+                                           id="editLike"
+                                           placeholder="点赞"
+                                    >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-offset-1 col-sm-2 control-label">审核</label>
+                                <div class="col-sm-7">
+                                    <input type="text"
+                                           name="isAuth"
+                                           class="form-control"
+                                           id="editIsAuth"
+                                           placeholder="isAuth"
+                                    >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-offset-1 col-sm-2 control-label">创建时间</label>
+                                <div class="col-sm-7">
+                                    <input type="date"
+                                           name="createdAt"
+                                           class="form-control"
+                                           id="editCreatedAt"
+                                           placeholder="createdAt"
+                                    >
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        <button onclick="sureEdit()" type="button" class="btn btn-primary">确定</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
+<!-- 删除模态框 -->
+<section>
+    <section class="container">
+        <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="gridSystemModalLabel">删除</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <form class="form-horizontal"
+                                  name="deleteForm"
+                                  id="deleteForm"
+                                  action="/deleteModal"
+                                  method="POST"
+                            >
+                                <div class="alert alert-danger" role="alert">确定要删除这条信息吗？</div>
+                                <div class="col-sm-7">
+                                    <input type="hidden" id="showDlete">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        <button id="sureDelete" onclick="Delete()" data-dismiss="modal" type="button" class="btn btn-primary">确定</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
+<!-- 评论框 -->
+<div class="modal fadeComment" id="comment-modal" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="gridSystemModalLabel">发表评论</h4>
+            </div>
+            <div class="modal-body">
+                <form action="" id="commentList">
+                    <textarea name="comment_text">请输入您的评论...</textarea>
+                    <div>
+                        <input type="hidden" id="showComid" name="id">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" onclick="sureComment()">评论</button>
+            </div>
+        </div>
+    </div>
+</div>
+{{#section 'customjs'}}
+    <script src = "./vendor/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src = "./vendor/datatables.net/js/dataTables.bootstrap.min.js"></script>
+    <script>
+        //文档就绪事件
+        $(document).ready(function(){
+            getBlogList();
+        });
+        function getBlogList(){
+            var para  ='';
+            $.ajax({
+                url:'/api/blog-list',
+                type: 'GET',
+                async:true,
+                data:para,
+                success: function(res)
+                {
+
+                    if(parseInt(res.code)==1)
+                    {
+                        var _blogSet = getBlogArr(res.blog);
+                        renderTable(_blogSet);
+                        $("thead").css("display","none");
+                    }
+                }
+            });
+        }
+
+        //构造取得的数据
+        function getBlogArr(blogSet) {
+            var _blogArr = blogSet;
+            var jsoncount =_blogArr.length;
+            var blogData =  new Array();
+
+            for(var i=0;i<jsoncount;i++)
+            {
+                var _arr = new Array();
+                _arr[0]= '<div class="row"> \
+                             <div class="col-sm-2 img"><img src="images/50.jpg"></div> \
+                             <div class="col-sm-6 authTit">'+
+                                   '<a href="#">'+_blogArr[i].author +'</a>'+
+                                   '<a href="/blog/detail-list/'+_blogArr[i]._id+'">'+_blogArr[i].title+'</a>'+
+                             '</div> \
+                          </div> \
+                         <div class="row"> \
+                             <div class="col-sm-11 cont">'+
+                                    '<a href="/blog/detail-list/'+_blogArr[i]._id+'">'+delContentLength(_blogArr[i].content)+'</a>' +
+                             '</div> \
+                             <div class="col-sm-12 imgs"> \
+                                    <a href="#"><img src="images/yule1.jpg"></a> \
+                                    <a href="#"><img src="images/yule2.jpg"></a> \
+                                    <a href="#"><img src="images/yule3.jpg"></a> \
+                              </div> \
+                         </div> \
+                    <div class="row"> \
+                             <div class="col-sm-2 time">'+ correctTime(_blogArr[i].createdAt) +'</div> \
+                             <div class="col-sm-4 entertainment">娱乐&nbsp;&nbsp;&nbsp;八卦</div> \
+                             <div class="col-sm-3 ">'+ _blogArr[i].like +'&nbsp;&nbsp;不喜欢</div> \
+                             <div class="col-sm-2 comment"><input class="comment-btn" type="button" value="评论('+_blogArr[i].comment.length+')" onclick="Comment(\'' + _blogArr[i]._id + '\')">&nbsp;|&nbsp;<span>分享</span></div> \
+                    </div> ';
+                blogData[i]=_arr;
+            }
+            return blogData;
+        }
+
+        //渲染数据
+        function renderTable(blogSet) {
+            $('#blogExample').DataTable( {
+                data:blogSet,
+                columns: [
+                    {title:""},
+                ]
+            } );
+        }
+        //正确时间
+        function correctTime(time) {
+            var date = new Date(time),
+                    year = date.getFullYear(),
+                    month = (date.getMonth() + 1)<10 ? '0'+ (date.getMonth() + 1):date.getMonth() + 1,
+                    day = date.getDate()< 10 ? '0' + date.getDate() : date.getDate(),
+                    hours = date.getHours() < 10 ? '0' + date.getHours() : date.getHours(),
+                    min = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes(),
+                    sec = date.getSeconds() < 10 ? '0'+ date.getSeconds() : date.getSeconds();
+            var time = year + "/" + month + "/" + day + " " + hours + ":" + min + ":" + sec;
+            return time;
+        }
+        //评论
+        function Comment(id){
+            if(localStorage.getItem('userName')){
+                var id = id.trim();
+                $("#showComid").val(id);
+                console.log($(".comment-btn input"));
+                $("input.comment-btn").attr("data-target", "#comment-modal");
+                $("input.comment-btn").attr("data-toggle", "modal");
+            }
+            else{
+                alert("请先登录");
+
+            }
+
+        }
+        function sureComment(){
+            //将表单数据序列化
+            var para = $("#commentList").serialize();
+            $.ajax({
+                url:'/api/sure-comment/',
+                type:'POST',
+                async:'true',
+                data:para,
+                success:function(res){
+                    window.location.href = '/api/blogs';
+                }
+            });
+        }
+        //处理显示内容的长度
+        function delContentLength(content) {
+            if(content.length > 100)
+            {
+                return content.slice(0, 111) + "...";
+            }
+            else{
+                return content;
+            }
+        }
+
+    </script>
+{{/section}}

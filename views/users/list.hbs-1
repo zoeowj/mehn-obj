@@ -1,0 +1,42 @@
+{{#section 'head'}}
+    <link rel="stylesheet" href="./vendor/datatables.net/css/dataTables.bootstrap.min.css">
+{{/section}}
+
+
+<section class="content">
+    <table id="example"
+           class="table table-striped table-bordered"
+           cellspacing="0"
+           width="100%">
+    </table>
+</section>
+
+{{#section 'customjs'}}
+    <script src = "./vendor/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src = "./vendor/datatables.net/js/dataTables.bootstrap.min.js"></script>
+    <script>
+        //文档就绪事件
+        $(document).ready(function(){
+            getUsersList();
+        });
+        function getUsersList(){
+            var para  ='';// $("#signform").serialize();
+            $.ajax({
+                url:'/users/get-users-list',
+                type: 'POST',
+                async:true,
+                data:para,
+                success: function(res)
+                {
+
+                    if(parseInt(res.code)==1)
+                    {
+//                        var _userSet = getUserArr(data.data.users)
+//                        renderTable(_userSet);
+                        console.log(res.users);
+                    }
+                }
+            });
+        }
+    </script>
+{{/section}}

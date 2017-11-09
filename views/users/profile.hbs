@@ -1,0 +1,293 @@
+{{#section 'head'}}
+
+{{/section}}
+
+<section class="container">
+    {{#each users}}
+    {{#if picture}}
+        <div class="form-group">
+            <label for="fieldPhoto" class="col-sm-2 control-label" style="text-align:right">头像</label>
+            <img src="{{picture}}">
+        </div>
+    {{else}}
+        <div >你还没有头像，请上传一张头像</div>
+    {{/if}}
+{{/each}}
+    <form class="form-horizontal" role="form"
+          enctype="multipart/form-data"
+          method="POST"
+          action="/users/upload-profile/{{UID}}/{{year}}/{{month}}/{{timestr}}"
+    >
+        <div class="form-group">
+            <label for="fieldPhoto" class="col-sm-2 control-label">Profile photo</label>
+            <div class="col-sm-4">
+                <input
+                        type="file"
+                        class="form-control"
+                        required
+                        accept="image/*"
+                        id="fieldPhoto"
+                        name="photo">
+                <input type="hidden" name="uid" value="{{UID}}">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-4">
+                <button type="submit"
+                        class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </form>
+    <hr>
+
+    <!--<div class="form-group">
+        <form class="form-horizontal"
+              name="signUpform"
+              id="signUpform"
+              action="/sign-up"
+              method="POST"
+        >
+            <label for="" class="col-sm-offset-1 col-sm-2 control-label">手机号</label>
+            <div class="col-sm-4">
+                <input type="tel"
+                       name="phone"
+                       class="form-control"
+                       id="phone"
+                       placeholder="手机号"
+                       value="{{phone}}">
+            </div>
+        </form>
+    </div>-->
+
+
+
+        <h1 style="text-align:center">完善个人信息</h1>
+        <form class="form-horizontal"
+              name="edit"
+              id="selfInfo"
+              action="/editModal"
+              method="POST"
+        >
+            <div class="form-group">
+                <label for="" class="col-sm-offset-1 col-sm-2 control-label">真实姓名</label>
+                <div class="col-sm-7">
+                    <input type="text"
+                           value="{{realName}}"
+                           name="realName"
+                           class="form-control"
+                           id="realName"
+                           placeholder="真实姓名"
+                           required
+                    >
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-sm-offset-1 col-sm-2 control-label">昵称</label>
+                <div class="col-sm-7">
+                    <input type="text"
+                           value="{{nickName}}"
+                           name="nickName"
+                           class="form-control"
+                           id="nickName"
+                           placeholder="昵称">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-sm-offset-1 col-sm-2 control-label">用户名</label>
+                <div class="col-sm-7">
+                    <input type="text"
+                           value="{{userName}}"
+                           name="userName"
+                           class="form-control"
+                           id="userName"
+                           placeholder="用户名">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-sm-offset-1 col-sm-2 control-label">性别</label>
+                <div class="col-sm-7">
+                    <div class="checkbox">
+                        <label>
+                            <input id="male" type="radio" name="gender" value="1"> 男
+                        </label>
+                        <label>
+                            <input id="female" type="radio" name="gender" value="0"> 女
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-sm-offset-1 col-sm-2 control-label">手机号</label>
+                <div class="col-sm-7">
+                    <input type="tel"
+                           value="{{phone}}"
+                           name="phone"
+                           class="form-control"
+                           id="phone"
+                           placeholder="手机号">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-sm-offset-1 col-sm-2 control-label">邮箱</label>
+                <div class="col-sm-7">
+                    <input type="text"
+                           value="{{email}}"
+                           name="email"
+                           class="form-control"
+                           id="email"
+                           placeholder="邮箱">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-sm-offset-1 col-sm-2 control-label">年龄</label>
+                <div class="col-sm-7">
+                    <input type="text"
+                           value="{{age}}"
+                           name="age"
+                           class="form-control"
+                           id="age"
+                           placeholder="年龄">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-sm-offset-1 col-sm-2 control-label">地址</label>
+                <div class="col-sm-7">
+                    <input type="text"
+                           value="{{address}}"
+                           name="address"
+                           class="form-control"
+                           id="address"
+                           placeholder="地址">
+                </div>
+            </div>
+
+        </form>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            <button onclick="validatorProfile()" type="button" class="btn btn-primary">保存</button>
+        </div>
+
+</section>
+
+
+{{#section 'customjs'}}
+<script>
+    function validatorProfile(){
+        var ret = true;
+        if(!validator.isLength($("#realName").val(),{min:2,max:20})){
+            ret = false;
+            $("#realName").focus();
+            return false;
+        }
+        if(!validator.isLength($("#nickName").val(),{min: 1, max: 5})){
+            ret = false;
+            $("#nickName").focus();
+            alert("昵称格式不正确！");
+            return false;
+        }
+        if(!validator.isLength($("#userName").val(),{min: 1, max: 5})){
+            ret = false;
+            $("#userName").focus();
+            alert("用户名不正确！");
+            return false;
+        }
+        if(!validator.isEmail($("#email").val())){
+            ret = false;
+            $("#email").focus();
+            alert("邮箱不正确！");
+            return false;
+        }
+        if(validator.isEmpty($("#age").val())){
+            ret = false;
+            $("#age").focus();
+            alert("年龄不为空！");
+            return false;
+        }
+        if(validator.isEmpty($("#address").val())){
+            ret = false;
+            $("#address").focus();
+            alert("地址不为空！");
+            return false;
+        }
+        if(ret){
+            saveProfile();
+        }
+    }
+    /*function signup(){
+        var para = $("#signUpForm").serialize();
+        alert("signup");
+        $.ajax({
+            url: '/users/signup',
+            type: 'POST',
+            async: true,
+            data: para,
+            success: function(res){
+                if(parseInt(res.code) === 0){
+                    $("#captchaErr").css("display", "block");
+                    alert(res.msg);
+                }
+                if(parseInt(res.code) === 1){
+                    console.log(res);
+                    window.location.href = res.url;
+                    $("#captchaErr").css("display", "none");
+                    alert(res.msg);
+                }
+            }
+        });
+    }*/
+    function saveProfile(){
+        //序列化
+        var para = $("#selfInfo").serialize();
+        alert(para);
+        $.ajax(
+                {
+                    url:'/users/save-profile',
+                    type:'POST',
+                    async:true,
+                    data:para,
+                    success:function (res) {
+                        console.log(res);
+                        if(parseInt(res.code) === 1){
+                         //window.location.href = res.url;
+                            getMyProfile();
+                        }
+                    }
+                }
+        );
+    }
+
+//文档就绪事件
+    $(document).ready(function(){
+        getMyProfile();
+    });
+    function getMyProfile(){
+        var para = '';
+        $.ajax(
+                {
+                    url:'/users/profile',
+                    type:'GET',
+                    async:true,
+                    data:para,
+                    success:function(data){
+                        console.log(data);
+                        if(parseInt(data.code) === 1) {
+                            if (parseInt(data.users[0].gender) === 1) {
+                                $("#male").attr("checked", "checked");
+                            }
+                            if (parseInt(data.users[0].gender) === 0) {
+                                $("#female").attr("checked", "checked");
+                            }
+                            $("#realName").val(data.users[0].realName);
+                            $("#nickName").val(data.users[0].nickName);
+                            $("#userName").val(data.users[0].userName);
+                            $("#phone").val(data.users[0].phone);
+                            $("#email").val(data.users[0].email);
+                            $("#age").val(data.users[0].age);
+                            $("#address").val(data.users[0].address);
+                        }
+                    }
+                }
+        );
+    }
+</script>
+{{/section}}

@@ -1,0 +1,398 @@
+{{#section 'head'}}
+    <link rel="stylesheet" href="./vendor/datatables.net/css/dataTables.bootstrap.min.css">
+{{/section}}
+
+<section class="content">
+    <table id="example"
+           class="table table-striped table-bordered"
+           cellspacing="0"
+           width="100%">
+    </table>
+    <input class="btn btn-default" type="button" value="新增" data-toggle="modal" data-target="#addModal">
+</section>
+<!-- 编辑模态框 -->
+<section>
+    <section class="container">
+        <div id="editModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="gridSystemModalLabel">编辑</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal"
+                              name="editForm"
+                              id="editForm"
+                              action="/editModal"
+                              method="POST"
+                        >
+                            <div class="form-group">
+                                <label for="" class="col-sm-offset-1 col-sm-2 control-label">真实姓名</label>
+                                <div class="col-sm-7">
+                                    <input type="text"
+                                           name="realName"
+                                           class="form-control"
+                                           id="editRealName"
+                                           placeholder="真实姓名"
+                                           required
+                                    >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-offset-1 col-sm-2 control-label">昵称</label>
+                                <div class="col-sm-7">
+                                    <input type="text"
+                                           name="nickName"
+                                           class="form-control"
+                                           id="editNickName"
+                                           placeholder="昵称">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-offset-1 col-sm-2 control-label">用户名</label>
+                                <div class="col-sm-7">
+                                    <input type="text"
+                                           name="userName"
+                                           class="form-control"
+                                           id="editUserName"
+                                           placeholder="用户名">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-offset-1 col-sm-2 control-label">性别</label>
+                                <div class="col-sm-7">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="radio" name="gender" value="1" id="male"> 男
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="gender" value="0" id="female"> 女
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-offset-1 col-sm-2 control-label">手机号</label>
+                                <div class="col-sm-7">
+                                    <input type="tel"
+                                           name="phone"
+                                           class="form-control"
+                                           id="editPhone"
+                                           placeholder="手机号"
+                                           readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-offset-1 col-sm-2 control-label">邮箱</label>
+                                <div class="col-sm-7">
+                                    <input type="text"
+                                           name="email"
+                                           class="form-control"
+                                           id="editEmail"
+                                           placeholder="邮箱"
+                                           readonly
+                                    >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-offset-1 col-sm-2 control-label">年龄</label>
+                                <div class="col-sm-7">
+                                    <input type="text"
+                                           name="age"
+                                           class="form-control"
+                                           id="editAge"
+                                           placeholder="年龄">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-offset-1 col-sm-2 control-label">地址</label>
+                                <div class="col-sm-7">
+                                    <input type="text"
+                                           name="address"
+                                           class="form-control"
+                                           id="editAddress"
+                                           placeholder="地址">
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        <button onclick="sureEdit()" type="button" class="btn btn-primary">确定</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
+<!-- 删除模态框 -->
+<section>
+    <section class="container">
+        <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="gridSystemModalLabel">删除</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <form class="form-horizontal"
+                                  name="deleteForm"
+                                  id="deleteForm"
+                                  action="/deleteModal"
+                                  method="POST"
+                            >
+                                <div class="alert alert-danger" role="alert">确定要删除这条信息吗？</div>
+                                <div class="col-sm-7">
+                                    <input type="hidden" id="showDlete">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        <button id="sureDelete" onclick="Delete()" data-dismiss="modal" type="button" class="btn btn-primary">确定</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
+<!-- 新增模态框 -->
+<section>
+    <section class="container">
+        <div id="addModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="gridSystemModalLabel">新增</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal"
+                              name="addForm"
+                              id="addForm"
+                        >
+                            <div class="form-group">
+                                <label for="" class="col-sm-offset-1 col-sm-2 control-label">手机号</label>
+                                <div class="col-sm-7">
+                                    <input type="tel"
+                                           name="phone"
+                                           class="form-control"
+                                           id="editPhone"
+                                           placeholder="手机号">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-offset-1 col-sm-2 control-label">密码</label>
+                                <div class="col-sm-7">
+                                    <input type="text"
+                                           name="pwd"
+                                           class="form-control"
+                                           id="editPwd"
+                                           placeholder="密码">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        <button onclick="addUser()" type="button" class="btn btn-primary">确定</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
+
+{{#section 'customjs'}}
+    <script src = "./vendor/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src = "./vendor/datatables.net/js/dataTables.bootstrap.min.js"></script>
+    <script>
+        //文档就绪事件
+        $(document).ready(function(){
+            getUsersList();
+        });
+        //发起ajax请求
+        function getUsersList(){
+            var para  ='';// $("#signform").serialize();
+            $.ajax({
+                url:'/users/get-users-list',
+                type: 'POST',
+                async:true,
+                data:para,
+                success: function(res)
+                {
+
+                    if(parseInt(res.code)==1)
+                    {
+                        var _userSet = getUserArr(res.users,res.role)
+                        renderTable(_userSet,res.role);
+                        console.log(res.users);
+                    }
+                }
+            });
+        }
+
+        //构造取得的数据
+        function getUserArr(userSet,role) {
+            var _userArr = userSet;
+            var jsoncount =_userArr.length;
+            var userData =  new Array();
+
+            for(var i=0;i<jsoncount;i++)
+            {
+                var _arr = new Array();
+                _arr[0]= "<input type='checkbox'>";
+                _arr[1]= _userArr[i].realName;
+                _arr[2]= _userArr[i].nickName;
+                _arr[3]= _userArr[i].userName;
+                if(parseInt(_userArr[i].gender)==1)
+                {
+                    _arr[4]= "男";
+                }
+                if(parseInt(_userArr[i].gender)==0)
+                {
+                    _arr[4]= "女";
+                }
+                _arr[5]= _userArr[i].phone;
+                _arr[6]= _userArr[i].email;
+                _arr[7]= _userArr[i].age;
+                _arr[8] = _userArr[i].address;
+                _arr[9] = '<button class="btn btn-default btn-sm" \
+			 data-toggle="modal" data-target="#editModal" onclick="edit(\'' + _userArr[i]._id + '\')"> \
+			 <span class="glyphicon glyphicon-pencil"></span> \
+		  </button>  \
+		<button class="btn btn-danger btn-sm" data-toggle="modal" \
+		 data-target="#deleteModal" onclick="deleteData(\'' + _userArr[i]._id + '\')"> \
+		<span class="glyphicon glyphicon-trash"></span> \
+	</button>';
+                if(!role) {
+                    _arr.shift();
+                    _arr.pop();
+                }
+                userData[i]=_arr;
+            }
+            return userData;
+        }
+
+        //渲染数据
+        function renderTable(userSet,role) {
+            var col = [
+                {title:"<input type='checkbox'>"},
+                { title: "真实姓名" },
+                { title: "昵称" },
+                { title: "用户名" },
+                { title: "性别" },
+                { title: "手机号" },
+                { title: "邮箱" },
+                { title: "年龄" },
+                { title: "地址" },
+                { title: "操作",orderable: false }
+            ];
+            if(!role){
+               col.shift();
+               col.pop();
+            }
+                $('#example').DataTable( {
+                    data:userSet,
+                    columns: col
+                } );
+        }
+        //编辑数据
+        function edit(id) {
+            $.ajax(
+                    {
+                        url: "/users/show-user/" + id,
+                        type: "GET",
+                        async: true,
+                        data: "",
+                        success: function (res) {
+                            console.log(res);
+                            if (parseInt(res.code) === 1) {
+                                console.log(res.users[0].gender);
+                                if (parseInt(res.users[0].gender) === 1) {
+                                    $("#male").attr("checked", "checked");
+                                }
+                                if (parseInt(res.users[0].gender) === 0) {
+                                    $("#female").attr("checked", "checked");
+                                }
+                                $("#editRealName").val(res.users[0].realName);
+                                $("#editNickName").val(res.users[0].nickName);
+                                $("#editUserName").val(res.users[0].userName);
+                                $("#editPhone").val(res.users[0].phone);
+                                $("#editEmail").val(res.users[0].email);
+                                $("#editAge").val(res.users[0].age);
+                                $("#editAddress").val(res.users[0].address);
+                            }
+                        }
+                    });
+        }
+        function sureEdit(){
+            //将表单数据序列化
+            var para = $("#editForm").serialize();
+                  $.ajax({
+                      url:'/users/save-profile',
+                      type:"POST",
+                      async:true,
+                      data:para,
+                      success:function(res){
+                          if(parseInt(res.code) === 1)
+                          {
+                              window.location.href = "/users/list";
+                          }
+                      }
+                  });
+        }
+        //删除数据
+        function deleteData(id){
+            $("#showDlete").val(id);
+        }
+        function Delete(){
+            $.ajax({
+                url:'/users/delete-user/' + $("#showDlete").val(),
+                type:'GET',
+                async:true,
+                data:'',
+                success:function(res){
+                    if(parseInt(res.code) === 1)
+                    {
+                        window.location.href = "/users/list";
+                    }
+                }
+            });
+        }
+        //新增
+        function addUser(){
+            var para = $("#addForm").serialize();
+            alert(para);
+            $.ajax(
+                    {
+                        url:'/users/add-data',
+                        type:'POST',
+                        async:true,
+                        data:para,
+                        success:function (res) {
+                            if(parseInt(res.code) === 1){
+                                // console.log(res);
+                                window.location.href = "/users/list";
+                            }
+                        }
+                    }
+            );
+        }
+    </script>
+{{/section}}
+
+
+
+
+
+
+
+
+
+

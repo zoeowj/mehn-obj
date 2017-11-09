@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<!-- 条件注释 -->
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><![endif]-->
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <!-- 文件执行时所在目录 -->
+    <base href="/">
+    <title>header&footer</title>
+    <link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="stylesheets/homenewlayout.css">
+    <link rel="stylesheet" href="stylesheets/index.css">
+    <!--<link rel="stylesheet" type="text/css" href="favicon.ico">-->
+
+    <!-- Main css -->
+    {{{_sections.head}}}
+
+</head>
+<body>
+<header>
+    <!--<nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Project name</a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Home</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a class="btn btn-lg" data-toggle="modal" href="/users/signin">sign In</a></li>
+                    <li><a class="btn btn-lg" data-toggle="modal" href="/users/signup">sign Up</a></li>
+                </ul>
+            </div>&lt;!&ndash;/.nav-collapse &ndash;&gt;
+        </div>
+    </nav>-->
+
+    {{> navigation}}
+</header>
+
+<main class="container">{{{body}}}</main>
+
+<!--<footer>
+    <section class="">
+        <div class="">
+            <dl class="footer_first">
+                <dt>
+                    APICloud产品
+                </dt>
+                <dd>
+                    <a href="/superwebview">
+                        SuperWebView
+                    </a>
+                </dd>
+                <dd>
+                    <a href="/deepengine">
+                        Deep Engine
+                    </a>
+                </dd>
+                <dd>
+                    <a href="/cloudservice">
+                        数据云
+                    </a>
+                </dd>
+                <dd>
+                    <a href="/cloudmanage">
+                        运营云
+                    </a>
+                </dd>
+                <dd>
+                    <a href="http://app.apicloud.com/customIntroduce">
+                        APP定制
+                    </a>
+                </dd>
+                <dd>
+                    <a href="/modulestore">
+                        模块Store
+                    </a>
+                </dd>
+            </dl>
+            <dl class="footer_second">
+                <dt>
+                    VIP服务
+                </dt>
+                <dd>
+                    <a href="/vipservice/price">
+                        VIP服务
+                    </a>
+                </dd>
+                <dd>
+                    <a href="/vipservice/plan">
+                        云服务价格
+                    </a>
+                </dd>
+                <dd>
+                    <a href="/vipservice/channel">
+                        渠道打包
+                    </a>
+                </dd>
+                <dd>
+                    <a href="/vipservice/enterpEdition">
+                        优先技术支持
+                    </a>
+                </dd>
+                <dd>
+                    <a href="/vipservice/course">
+                        培训课程
+                    </a>
+                </dd>
+                <dd>
+                    <a href="/vipservice/attest">
+                        认证工程师
+                    </a>
+                </dd>
+            </dl>
+            <dl>
+                <dt>
+                    资源
+                </dt>
+                <dd>
+                    <a href="http://docs.apicloud.com/" rel="nofollow">
+                        文档
+                    </a>
+                </dd>
+                <dd>
+                    <a target="_blank" href="http://www.apicloud.com/video_list">
+                        视频教程
+                    </a>
+                </dd>
+                <dd>
+                    <a target="_blank" href="http://docs.apicloud.com/APICloud/download" rel="nofollow">
+                        SDK下载
+                    </a>
+                </dd>
+                <dd>
+                    <a target="_blank" href="/devtools">
+                        开发工具
+                    </a>
+                </dd>
+                <dd>
+                    <a target="_blank" href="/source_code">
+                        源码下载
+                    </a>
+                </dd>
+            </dl>
+            <dl>
+                <dt>
+                    APICloud
+                </dt>
+                <dd>
+                    <a href="/about" rel="nofollow">
+                        关于我们
+                    </a>
+                </dd>
+                <dd>
+                    <a target="_blank" href="http://docs.apicloud.com/%E5%85%B6%E5%AE%83/terms-of-service" rel="nofollow">
+                        服务条款
+                    </a>
+                </dd>
+                <dd>
+                    <a target="_blank" href="http://docs.apicloud.com/%E5%85%B6%E5%AE%83/privacy-policy" rel="nofollow">
+                        隐私条款
+                    </a>
+                </dd>
+                <dd>
+                    <a href="/blog">
+                        Blog
+
+                    </a>
+                </dd>
+            </dl>
+            <link rel="stylesheet" href="stylesheets/lang.css">
+            <dl class="langouter">
+                <div class="langbox" id="selectLang">
+                    <div class="leftimg imgCN">
+                        &lt;!&ndash; <img src="/img/zh-CN.png" alt="中文"/> &ndash;&gt;
+                    </div>
+                    <div class="rightlabel">
+                        简体中文
+                    </div>
+                </div>
+                <div class="hidebox" style="display: none;">
+                    <div class="lang-tri-bottom">
+                    </div>
+                    <div class="langbox selected" lang="zh-CN">
+                        <div class="leftimg imgCN">
+                            &lt;!&ndash; <img src="/img/zh-CN.png" alt="中文"/> &ndash;&gt;
+                        </div>
+                        <div class="rightlabel">
+                            简体中文
+                        </div>
+                    </div>
+                    <div class="langbox" lang="en-US">
+                        <div class="leftimg imgUS">
+                            &lt;!&ndash; <img src="/img/en-US.png" alt="English"/> &ndash;&gt;
+                        </div>
+                        <div class="rightlabel">
+                            English
+                        </div>
+                    </div>
+                </div>
+            </dl>
+            <div class="footer-right">
+                <div class="row share">
+                    <a href="javascript:void(0)" class="share-links qq">
+                        <span class="share-qq"></span>
+                        &lt;!&ndash; <img src="../img/index-icon-weixin.png"  alt="app开发"  class="share-icon"/> &ndash;&gt;
+                    </a>
+                    <a rel="nofollow" class="share-links sina">
+                        <span class="share-sina"></span>
+                        &lt;!&ndash; <img src="../img/index-icon-weibo.png"  alt="移动应用开发"  class="share-icon"/> &ndash;&gt;
+                    </a>
+                    <a rel="nofollow" class="share-links weichat">
+                        <span class="share-weichat"></span>
+                        &lt;!&ndash; <img src="../img/index-icon-facebook.png"  alt="phonegap 教程"  class="share-icon"/> &ndash;&gt;
+                    </a>
+                    <a rel="nofollow" class="share-links zone">
+                        <span class="share-zone"></span>
+                        &lt;!&ndash; <img src="../img/index-icon-twitter.png"  alt="html5 app 开发"  class="share-icon"/> &ndash;&gt;
+                    </a>
+                </div>
+                <div class="qrcode" title="APICloud"></div>
+            </div>
+        </div>
+    </section>
+    <section class="link-exchange-box">
+        <div class="link-exchange">
+            <h5 class="tab">友情链接</h5>
+            <h5 class="tab">热门标签</h5>
+    </section>
+    <section class="copyright">
+        <label>
+            ©2014-2016&nbsp;APICloud&nbsp;&nbsp;&nbsp;&nbsp;<a target="_blank" href="http://www.miitbeian.gov.cn/state/outPortal/loginPortal.action" rel="nofollow">京ICP备14027692号</a>&nbsp;&nbsp;&nbsp;&nbsp;京ICP证151131号&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802020063" target="_blank" rel="nofollow">京公网安备 11010802020063号</a>
+        </label>
+    </section>
+</footer>-->
+
+<script src="vendor/jquery/dist/jquery.min.js"></script>
+<script src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="vendor/validator/validator.min.js"></script>
+<!-- 引用多个js合并后的js文件 -->
+<script src="javascripts/dist/thirdobj.js"></script>
+<script>
+    $("#signout").click(function () {
+        $.ajax({
+            url:'/api/clear-local',
+            type:'POST',
+            async:'true',
+            success:function(res){
+                if(parseInt(res.code) == 1){
+                    console.log("signout");
+                    localStorage.setItem('userName','');
+                }
+                else{
+                    console.log("err");
+                }
+                location.reload(true);
+            }
+        });
+    });
+    $(function () {
+        //重启服务器时，localStorage不会清空
+        if($("#signin").length > 0)
+        {
+            localStorage.setItem("userName", "");
+        }
+    });
+</script>
+
+{{{_sections.customjs}}}
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

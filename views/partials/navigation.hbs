@@ -1,0 +1,70 @@
+{{#each partials.navigationContext.locations}}
+        <div id="navbar" class="collapse navbar-collapse">
+            <nav class="navbar navbar-inverse navbar-fixed-top">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">Project name</a>
+                    </div>
+                    <div id="navbar" class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="#">Home</a></li>
+                            <li><a href="/about">About</a></li>
+                            <li><a href="/contact">Contact</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+
+                            {{#if Loginname}}
+                                <li> <a  class="dropdown-toggle glyphicon glyphicon-user"
+                                         data-toggle="dropdown"> Hi {{Loginname}}<span class="caret"></span></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li> <a href="/users/changpwd" class="active">更改密码</a></li>
+                                        <li> <a href="/users/profile" class="active">个人资料</a></li>
+                                        <li> <a href="/blog/list" class="active">我的博客</a></li>
+                                        <li id="signout"> <a class="active"><span class="glyphicon glyphicon-log-out">&nbsp;</span>退出  </a></li>
+                                    </ul>
+                                </li>
+                            {{else}}
+                                <li id="signin"> <a href="/users/signin" class="active "><span class="glyphicon glyphicon-log-in"></span> 登录 </a></li>
+                                <li ><a href="/users/signup"><span class="glyphicon glyphicon-registration-mark"></span> 注册</a> </li>
+
+                            {{/if}}
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+        </div>
+{{/each}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

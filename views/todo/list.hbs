@@ -1,0 +1,263 @@
+{{#section 'head'}}
+    <link rel="stylesheet" href="./vendor/datatables.net/css/dataTables.bootstrap.min.css">
+{{/section}}
+
+<section class="content">
+    <table id="todoExample"
+           class="table table-striped table-bordered"
+           cellspacing="0"
+           width="100%">
+    </table>
+</section>
+<!-- 编辑模态框 -->
+<section>
+    <section class="container">
+        <div id="editModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="gridSystemModalLabel">编辑</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal"
+                              name="editForm"
+                              id="editForm"
+                        >
+                            <div class="form-group">
+                                <label for="" class="col-sm-offset-1 col-sm-2 control-label">类别</label>
+                                <div class="col-sm-7">
+                                    <input type="text"
+                                           name="classTask"
+                                           class="form-control"
+                                           id="editClassTask"
+                                           placeholder="待办类别"
+                                    >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-offset-1 col-sm-2 control-label">待办事项</label>
+                                <div class="col-sm-7">
+                                    <input type="text"
+                                           name="task"
+                                           class="form-control"
+                                           id="editTask"
+                                           placeholder="待办事项"
+                                           required
+                                    >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-offset-1 col-sm-2 control-label">作者</label>
+                                <div class="col-sm-7">
+                                    <input type="text"
+                                           name="author"
+                                           class="form-control"
+                                           id="editAuthor"
+                                           placeholder="作者"
+                                           required
+                                    >
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="" class="col-sm-offset-1 col-sm-2 control-label">截止日期</label>
+                                <div class="col-sm-7">
+                                    <input type="date"
+                                           name="deadline"
+                                           class="form-control"
+                                           id="editDeadline"
+                                           placeholder="截止日期"
+                                           required
+                                    >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-offset-1 col-sm-2 control-label">是否完成</label>
+                                <div class="col-sm-7">
+                                    <input type="text"
+                                           name="isComplete"
+                                           class="form-control"
+                                           id="editIsComplete"
+                                           placeholder="是否完成"
+                                    >
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        <button onclick="sureEdit()" type="button" class="btn btn-primary">确定</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
+<!-- 删除模态框 -->
+<section>
+    <section class="container">
+        <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="gridSystemModalLabel">删除</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <form class="form-horizontal"
+                                  name="deleteForm"
+                                  id="deleteForm"
+                                  action="/deleteModal"
+                                  method="POST"
+                            >
+                                <div class="alert alert-danger" role="alert">确定要删除这条信息吗？</div>
+                                <div class="col-sm-7">
+                                    <input type="hidden" id="showDlete">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        <button id="sureDelete" onclick="Delete()" data-dismiss="modal" type="button" class="btn btn-primary">确定</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
+
+{{#section 'customjs'}}
+    <script src = "./vendor/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src = "./vendor/datatables.net/js/dataTables.bootstrap.min.js"></script>
+    <script>
+        //文档就绪事件
+        $(document).ready(function(){
+            getTodoList();
+        });
+        function getTodoList(){
+            var para  ='';
+            $.ajax({
+                url:'/todo/get-todo-list',
+                type: 'POST',
+                async:true,
+                data:para,
+                success: function(res)
+                {
+
+                    if(parseInt(res.code)==1)
+                    {
+                        var _userSet = getUserArr(res.todo);
+                        console.log("success", res.todo);
+                        renderTable(_userSet);
+                        console.log(res.todo);
+                    }
+                }
+            });
+        }
+
+        //构造取得的数据
+        function getUserArr(userSet) {
+            var _userArr = userSet;
+            var jsoncount =_userArr.length;
+            var userData =  new Array();
+
+            for(var i=0;i<jsoncount;i++)
+            {
+                var _arr = new Array();
+                _arr[0]= _userArr[i].classTask;
+                _arr[1]= _userArr[i].task;
+                _arr[2]= _userArr[i].author;
+                _arr[3]= _userArr[i].deadline;
+                _arr[4]= _userArr[i].isComplete;
+                _arr[5]= '<button class="btn btn-default btn-sm" \
+			 data-toggle="modal" data-target="#editModal" onclick="edit(\''+_userArr[i]._id+'\')"> \
+			 <span class="glyphicon glyphicon-pencil"></span> \
+		  </button>  \
+		<button class="btn btn-danger btn-sm" data-toggle="modal" \
+		 data-target="#deleteModal" onclick="deleteData(\''+_userArr[i]._id+'\')"> \
+		<span class="glyphicon glyphicon-trash"></span> \
+	</button>';
+                userData[i]=_arr;
+            }
+            return userData;
+        }
+
+        //渲染数据
+        function renderTable(userSet) {
+            $('#todoExample').DataTable( {
+                data:userSet,
+                columns: [
+                    { title: "类别" },
+                    { title: "任务" },
+                    { title: "作者" },
+                    { title: "截止日期" },
+                    { title: "是否完成" },
+                    { title: "操作",orderable: false }
+                ]
+            } );
+        }
+        //编辑数据
+        function edit(id) {
+            $.ajax(
+                    {
+                        url: "/todo/show-todo/" + id,
+                        type: "GET",
+                        async: true,
+                        data: "",
+                        success: function (res) {
+                            console.log(res);
+                            if (parseInt(res.code) === 1) {
+                                if (parseInt(res.todo[0].isComplete) === 1) {
+                                    console.log("完成");
+                                }
+                                if (parseInt(res.todo[0].isComplete) === 0) {
+                                    console.log("未完成");
+                                }
+                                $("#editClassTask").val(res.todo[0].classTask);
+                                $("#editTask").val(res.todo[0].task);
+                                $("#editAuthor").val(res.todo[0].author);
+                                $("#editDeadline").val(res.todo[0].deadline);
+                                $("#editIsComplete").val(res.todo[0].isComplete);
+                            }
+                        }
+                    });
+        }
+        function sureEdit(){
+            //将表单数据序列化
+            var para = $("#editForm").serialize();
+            $.ajax({
+                url:'/todo/save-profile',
+                type:"POST",
+                async:true,
+                data:para,
+                success:function(res){
+                    if(parseInt(res.code) === 1)
+                    {
+                        window.location.href = "/todo/list";
+                    }
+                }
+            });
+        }
+        //删除数据
+        function deleteData(id){
+            $("#showDlete").val(id);
+        }
+        function Delete(){
+            $.ajax({
+                url:'/todo/delete-todo/' + $("#showDlete").val(),
+                type:'GET',
+                async:true,
+                data:'',
+                success:function(res){
+                    if(parseInt(res.code) === 1)
+                    {
+                        window.location.href = "/todo/list";
+                    }
+                }
+            });
+        }
+    </script>
+{{/section}}

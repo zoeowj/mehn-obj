@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<!-- 条件注释 -->
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><![endif]-->
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <!-- 文件执行时所在目录 -->
+    <base href="/">
+    <title>header&footer</title>
+    <link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="stylesheets/homenewlayout.css">
+    <link rel="stylesheet" href="stylesheets/index.css">
+    <link rel="stylesheet" href="stylesheets/dashboard.css">
+    <!--<link rel="stylesheet" type="text/css" href="favicon.ico">-->
+
+    <!-- Main css -->
+    {{{_sections.head}}}
+
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Project name</a>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">Dashboard</a></li>
+                    <li><a href="#">设置</a></li>
+                    <li><a href="#">管理信息</a></li>
+                    <li><a href="#">帮助</a></li>
+                </ul>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <form class="navbar-form navbar-right">
+                    <input type="text" class="form-control" placeholder="Search...">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="/admin/sign-out">退出</a></li>
+                        <li><a href="#">更改密码</a></li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main class="container">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3 col-md-2 sidebar">
+                <ul class="nav nav-sidebar">
+                    <li class="active"><a href="#">主控台 <span class="sr-only">(current)</span></a></li>
+                    <li><a href="/users/list">用户管理</a></li>
+                </ul>
+                <ul class="nav nav-sidebar">
+                    <li><a href="/blog/list">博客管理</a></li>
+                </ul>
+                <ul class="nav nav-sidebar">
+                    <li><a href="/cms/list">内容管理</a></li>
+                </ul>
+                <ul class="nav nav-sidebar">
+                    <li><a href="">待办事项</a></li>
+                </ul>
+            </div>
+            <div class="Main">
+                {{{body}}}
+            </div>
+        </div>
+    </div>
+</main>
+
+
+
+<script src="vendor/jquery/dist/jquery.min.js"></script>
+<script src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+
+{{{_sections.customjs}}}
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

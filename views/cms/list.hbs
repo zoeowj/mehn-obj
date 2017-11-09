@@ -1,0 +1,427 @@
+{{#section 'head'}}
+    <link rel="stylesheet" href="./vendor/datatables.net/css/dataTables.bootstrap.min.css">
+{{/section}}
+
+<section class="content">
+    <table id="cmsExample"
+           class="table table-striped table-bordered"
+           cellspacing="0"
+           width="100%">
+    </table>
+    <input class="btn btn-default" type="button" value="新增" data-toggle="modal" data-target="#addModal">
+</section>
+<!-- 编辑模态框 -->
+<section>
+    <section class="container">
+        <div id="editModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="gridSystemModalLabel">编辑</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal"
+                              name="editForm"
+                              id="editForm"
+                        >
+                            <div class="form-group">
+                                <label for="" class="col-sm-offset-1 col-sm-2 control-label">类别</label>
+                                <div class="col-sm-7">
+                                    <input type="text"
+                                           name="classTitle"
+                                           class="form-control"
+                                           id="editClassTitle"
+                                           placeholder=""
+                                           required
+                                    >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-offset-1 col-sm-2 control-label">标题</label>
+                                <div class="col-sm-7">
+                                    <input type="text"
+                                           name="title"
+                                           class="form-control"
+                                           id="editTitle"
+                                           placeholder="请输入标题"
+                                           required
+                                    >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-offset-1 col-sm-2 control-label">内容</label>
+                                <div class="col-sm-7">
+                                    <input type="text"
+                                           name="content"
+                                           class="form-control"
+                                           id="editContent"
+                                           placeholder="请输入内容">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="" class="col-sm-offset-1 col-sm-2 control-label">作者</label>
+                                <div class="col-sm-7">
+                                    <input type="tel"
+                                           name="author"
+                                           class="form-control"
+                                           id="editAuthor"
+                                           placeholder="作者"
+                                           required
+                                    >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-offset-1 col-sm-2 control-label">isShow</label>
+                                <div class="col-sm-7">
+                                    <input type="text"
+                                           name="isShow"
+                                           class="form-control"
+                                           id="editIsShow"
+                                           placeholder=""
+                                    >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-offset-1 col-sm-2 control-label">地址</label>
+                                <div class="col-sm-7">
+                                    <input type="text"
+                                           name="url"
+                                           class="form-control"
+                                           id="editUrl"
+                                           placeholder=""
+                                           required
+                                    >
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        <button onclick="sureEdit()" type="button" class="btn btn-primary">确定</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
+<!-- 删除模态框 -->
+<section>
+    <section class="container">
+        <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="gridSystemModalLabel">删除</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <form class="form-horizontal"
+                                  name="deleteForm"
+                                  id="deleteForm"
+                                  action="/deleteModal"
+                                  method="POST"
+                            >
+                                <div class="alert alert-danger" role="alert">确定要删除这条信息吗？</div>
+                                <div class="col-sm-7">
+                                    <input type="hidden" id="showDlete">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        <button id="sureDelete" onclick="Delete()" data-dismiss="modal" type="button" class="btn btn-primary">确定</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
+<!-- 新增模态框 -->
+<section>
+    <section class="container">
+        <div id="addModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="gridSystemModalLabel">新增</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal"
+                              name="addForm"
+                              id="addForm"
+                        >
+                            <div class="form-group">
+                                <label for="" class="col-sm-offset-1 col-sm-2 control-label">类别</label>
+                                <div class="col-sm-7">
+                                    <input type="text"
+                                           name="classTitle"
+                                           class="form-control"
+                                           id="addClassTitle"
+                                           placeholder=""
+                                           required
+                                    >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-offset-1 col-sm-2 control-label">标题</label>
+                                <div class="col-sm-7">
+                                    <input type="text"
+                                           name="title"
+                                           class="form-control"
+                                           id="addTitle"
+                                           placeholder="请输入标题"
+                                           required
+                                    >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-offset-1 col-sm-2 control-label">内容</label>
+                                <div class="col-sm-7">
+                                    <input type="text"
+                                           name="content"
+                                           class="form-control"
+                                           id="addContent"
+                                           placeholder="请输入内容">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="" class="col-sm-offset-1 col-sm-2 control-label">作者</label>
+                                <div class="col-sm-7">
+                                    <input type="tel"
+                                           name="author"
+                                           class="form-control"
+                                           id="addAuthor"
+                                           placeholder="作者"
+                                           required
+                                    >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-offset-1 col-sm-2 control-label">审核</label>
+                                <div class="col-sm-7">
+                                    <input type="text"
+                                           name="isShow"
+                                           class="form-control"
+                                           id="addIsShow"
+                                           placeholder=""
+                                    >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-offset-1 col-sm-2 control-label">地址</label>
+                                <div class="col-sm-7">
+                                    <input type="text"
+                                           name="url"
+                                           class="form-control"
+                                           id="addUrl"
+                                           placeholder=""
+                                           required
+                                    >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-offset-1 col-sm-2 control-label">创建时间</label>
+                                <div class="col-sm-7">
+                                    <input type="text"
+                                           name="createdAt"
+                                           class="form-control"
+                                           id="addcCeatedAt"
+                                           placeholder=""
+                                    >
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        <button onclick="sureAdd()" type="button" class="btn btn-primary">确定</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
+{{#section 'customjs'}}
+    <script src = "./vendor/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src = "./vendor/datatables.net/js/dataTables.bootstrap.min.js"></script>
+    <script>
+        //文档就绪事件
+        $(document).ready(function(){
+            getCmsList();
+        });
+        function getCmsList(){
+            var para  ='';
+            $.ajax({
+                url:'/cms/get-cms-list',
+                type: 'POST',
+                async:true,
+                data:para,
+                success: function(res)
+                {
+
+                    if(parseInt(res.code)==1)
+                    {
+                        var _cmsSet = getCmsArr(res.cms,res.role);
+                        console.log("success", res.cms);
+                        renderTable(_cmsSet,res.role);
+                        console.log(res.cms);
+                    }
+                }
+            });
+        }
+
+        //构造取得的数据
+        function getCmsArr(cmsSet,role) {
+            var _cmsArr = cmsSet;
+            var jsoncount =_cmsArr.length;
+            var cmsData =  new Array();
+
+            for(var i=0;i<jsoncount;i++)
+            {
+                var _arr = new Array();
+                _arr[0]= "<input type='checkbox'>";
+                _arr[1]= _cmsArr[i].classTitle;
+                _arr[2]= _cmsArr[i].title;
+                _arr[3]= _cmsArr[i].content;
+                _arr[4]= _cmsArr[i].author;
+                _arr[5]= _cmsArr[i].isShow;
+                _arr[6]= _cmsArr[i].url;
+                _arr[7]= correctTime(_cmsArr[i].createdAt);
+                _arr[8] = '<button class="btn btn-default btn-sm" \
+			 data-toggle="modal" data-target="#editModal" onclick="edit(\'' + _cmsArr[i]._id + '\')"> \
+			 <span class="glyphicon glyphicon-pencil"></span> \
+		  </button>  \
+		<button class="btn btn-danger btn-sm" data-toggle="modal" \
+		 data-target="#deleteModal" onclick="deleteData(\'' + _cmsArr[i]._id + '\')"> \
+		<span class="glyphicon glyphicon-trash"></span> \
+	</button>';
+                if(!role) {
+                    _arr.shift();
+                    _arr.pop();
+                }
+                cmsData[i]=_arr;
+            }
+            return cmsData;
+        }
+
+        //渲染数据
+        function renderTable(cmsSet,role) {
+            var col = [
+                {title:"<input type='checkbox'>"},
+                { title: "类别" },
+                { title: "标题" },
+                { title: "内容" },
+                { title: "作者" },
+                { title: "审核" },
+                { title: "地址" },
+                { title: "创建时间" },
+                { title: "操作",orderable: false }
+            ];
+            if(!role){
+                col.shift();
+                col.pop();
+            }
+            $('#cmsExample').DataTable( {
+                data:cmsSet,
+                columns: col
+            } );
+        }
+        //编辑数据
+        function edit(id) {
+            $.ajax(
+                    {
+                        url: "/cms/show-cms/" + id,
+                        type: "GET",
+                        async: true,
+                        data: "",
+                        success: function (res) {
+                            console.log(res);
+                            if (parseInt(res.code) === 1) {
+                                console.log("isShow",res.cms[0].isShow)
+                                if (parseInt(res.cms[0].isShow) === 1) {
+                                    console.log("显示");
+                                }
+                                if (parseInt(res.cms[0].isShow) === 0) {
+                                    console.log("隐藏");
+                                }
+                                $("#editClassTitle").val(res.cms[0].classTitle);
+                                $("#editTitle").val(res.cms[0].title);
+                                $("#editContent").val(res.cms[0].content);
+                                $("#editAuthor").val(res.cms[0].author);
+                                $("#editIsShow").val(res.cms[0].isShow);
+                                $("#editUrl").val(res.cms[0].url);
+                                $("#editCreatedAt").val(res.cms[0].createdAt);
+                            }
+                        }
+                    });
+        }
+        function sureEdit(){
+            //将表单数据序列化
+            var para = $("#editForm").serialize();
+            $.ajax({
+                url:'/cms/save-profile',
+                type:"POST",
+                async:true,
+                data:para,
+                success:function(res){
+                    if(parseInt(res.code) === 1)
+                    {
+                        window.location.href = "/cms/list";
+                    }
+                }
+            });
+        }
+        //删除数据
+        function deleteData(id){
+            $("#showDlete").val(id);
+        }
+        function Delete(){
+            $.ajax({
+                url:'/cms/delete-cms/' + $("#showDlete").val(),
+                type:'GET',
+                async:true,
+                data:'',
+                success:function(res){
+                    if(parseInt(res.code) === 1)
+                    {
+                        window.location.href = "/cms/list";
+                    }
+                }
+            });
+        }
+        //新增
+        function sureAdd(){
+            var para = $("#addForm").serialize();
+            $.ajax({
+                url:'/cms/add-cms',
+                type:'POST',
+                async:true,
+                data:para,
+                success:function(res){
+                    if(parseInt(res.code) === 1){
+                        window.location.href = "/cms/list";
+                    }
+                }
+            });
+        }
+        //正确时间
+        function correctTime(time) {
+            var date = new Date(time),
+                    year = date.getFullYear(),
+                    month = (date.getMonth() + 1)<10 ? '0'+ (date.getMonth() + 1):date.getMonth() + 1,
+                    day = date.getDate()< 10 ? '0' + date.getDate() : date.getDate(),
+                    hours = date.getHours() < 10 ? '0' + date.getHours() : date.getHours(),
+                    min = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes(),
+                    sec = date.getSeconds() < 10 ? '0'+ date.getSeconds() : date.getSeconds();
+            var time = year + "/" + month + "/" + day + " " + hours + ":" + min + ":" + sec;
+            return time;
+        }
+
+    </script>
+{{/section}}

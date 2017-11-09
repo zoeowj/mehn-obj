@@ -1,0 +1,171 @@
+{{#section 'head'}}
+    <link rel="stylesheet" href="./vendor/datatables.net/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="./stylesheets/blogs.css">
+{{/section}}
+
+<section class="content">
+    <section class="blogContent">
+        <h2>左右脑年龄测试：一种“丧失自我”的自利性游戏</h2>
+        <div class="articleContent">
+            <div class="detailImg"><img src="./images/detail-img.jpg" alt=""></div>
+            <p>“左右脑年龄测试游戏”在“朋友圈”热传后，主流媒体出来喊话：“不靠谱”，程序员紧随其后，实证“年龄评价”为随机数。实际上，就算媒体不喊话，人们也知道这种“测试”就是一种游戏。但这依旧不妨碍人们对一种“测试游戏”的狂热与追逐，只是背后体现的却是实实在在的“丧失自我”。</p>
+            <p>坦白而言，光靠几个问题就要对一个人的大脑进行定性，似乎不太科学。但从人们的狂热与关注来看，似乎又对“测试游戏”中的评价比较在乎。说到底，问题不重要，测试也不重要，重要的是通过“自利性偏见”，让自己实现“存在感的放大”。</p>
+            <p>在每个人的记忆中，都会不自觉的夸大对自己的有利信息，而忽略对自己不利的部分。这种逻辑也正是这种“测试游戏”能被追逐的主要原因，明眼人自然会发现，测试的结果里，不管左右脑年龄数是多少，“评价论述”中几乎都是优点多于缺点。</p>
+            <p>在每个人的记忆中，都会不自觉的夸大对自己的有利信息，而忽略对自己不利的部分。这种逻辑也正是这种“测试游戏”能被追逐的主要原因，明眼人自然会发现，测试的结果里，不管左右脑年龄数是多少，“评价论述”中几乎都是优点多于缺点。</p>
+            <p>这种天然的“自利性评价”自然会打动人心，让人们在社交媒体里可以尽情自嗨。类似的逻辑，其实也是“星座评价大师们”惯用的方式。因为我们很清楚的知道，在众多“星座显学”里，每一个星座都有对应的优缺点，而且总体而言，都是优点大于缺点，这很符合人们的接纳心理。与此同时，也符合人性的多元理论。</p>
+            <p>我们不得不承认，人性中的“利己性”是一种弱点，于此当外界为我们提供好一种“自利性评价体系”时，就不免顺势堕入迷局。这种“自利性偏见”的魔力，着实在生活中有很多。于此，才会让那些“马屁精们”乘虚而入。</p>
+            <p>说到底，认不清自己是一件很沮丧的事情。只是，现今的社会里，大多数人被生活拖着走，物欲的膨胀牵引着一切，没什么东西是固定不变的；人人苦心焦虑，金钱成为区分贵贱尊卑的主要标志。但作为普通人总要活着，总要取悦自己，总要在“丧失自我”的时候找回自己。于是“测试游戏”横空出世，即便只是游戏一场，但起码让人们在幻觉中描摹出满意的自己。</p>
+            <p>都说“朋友圈”是“戏精”的舞台，所反映的场景里，大多数是一种理想的状态。婚姻和睦，恋爱纯情，家族和谐，爱国有道，小目标实现，微商们汹涌，但真相是什么，或许永远只有自己清楚。当然，我们也不排除很多人在记录生活。不管怎样，只要能实现想要的生活，哪怕装也要装到底。</p>
+            <p>坦白而言，绝大多数人难以逃脱“镜中我效应”的魔咒，依照社会学家查尔斯·霍顿·库利提出的论述：“一个人的自我观念是在与其他人的交往中形成的，一个人对自己的认识是其他人对自己看法的反映，他所具有的这种感觉，是别人的思想，别人对自己的态度所决定的”。</p>
+            <p>当然，只有那些圣贤们，不会被这种逻辑绑架，但对于常人而言，或多或少都会被左右。尤其，在一个“丧失自我”的大环境里，所有人都怀着一样的梦想：“有车有房有小目标”。这种充满焦虑的渴求中，“自我评价”自然也得靠外界策划。</p>
+            <p>于是，“明知道”不靠谱也会往上靠，人还是那个人，年龄却在逐年增长。于是，对于“年龄的冻结”，“自我评价的高攀”就很容易被驱动出来。这种时候，稍微有外界刺激，人们就能瞬间迸射，就像憋着尿找厕所那种囧状一般，一到厕所彻底“酸爽”。</p>
+            <p>但这种比“酸爽”并非来自上厕所行为本身，而只是一种心理上的释放。从这个角度上去看“左右脑年龄测试游戏”，似乎也相同的原理。人们本身的“丧失自我”已经积累到极点，但凡有一种短暂性安慰出现，自然也就集体失控，朋友圈刷屏。</p>
+            <p>人类终究是逃不出自己的，即便当年信誓旦旦骂过“阿Q”，可是当自己驾驭自己的时候，谁又能躲得过“阿Q的精神胜利怪圈”呢？</p>
+        </div>
+    </section>
+</section>
+
+
+{{#section 'customjs'}}
+    <script src = "./vendor/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src = "./vendor/datatables.net/js/dataTables.bootstrap.min.js"></script>
+    <script>
+        //文档就绪事件
+        $(document).ready(function(){
+            getDetailList();
+        });
+        function getDetailList(){
+            var para  ='';
+            $.ajax({
+                url:'/api/blog-detail-list',
+                type: 'GET',
+                async:true,
+                data:para,
+                success: function(res)
+                {
+
+                    /*if(parseInt(res.code)==1)
+                    {
+                        var _blogSet = getBlogArr(res.blog);
+                        renderTable(_blogSet);
+                        $("thead").css("display","none");
+                    }*/
+                }
+            });
+        }
+
+        //构造取得的数据
+        function getBlogArr(blogSet) {
+            var _blogArr = blogSet;
+            var jsoncount =_blogArr.length;
+            var blogData =  new Array();
+
+            for(var i=0;i<jsoncount;i++)
+            {
+                var _arr = new Array();
+                _arr[0]= '<div class="row"> \
+                             <div class="col-sm-2 img"><img src="images/50.jpg"></div> \
+                             <div class="col-sm-6 authTit">'+
+                        '<a href="#">'+_blogArr[i].author +'</a>'+
+                        '<a href="#">'+_blogArr[i].title+'</a>'+
+                        '</div> \
+                     </div> \
+                    <div class="row"> \
+                        <div class="col-sm-12 cont">'+
+                        '<a href="#">'+_blogArr[i].content+'</a>' +
+                        '</div> \
+                        <div class="col-sm-12 imgs">'+
+                        '<a href="#"><img src="images/yule1.jpg"></a>' +
+                        '<a href="#"><img src="images/yule2.jpg"></a>'+
+                        '<a href="#"><img src="images/yule3.jpg"></a>'+
+                        '</div> \
+                    </div> \
+               <div class="row"> \
+                   <div class="col-sm-2 time">'+ correctTime(_blogArr[i].createdAt) +'</div> \
+                             <div class="col-sm-7 entertainment">娱乐&nbsp;&nbsp;&nbsp;八卦</div> \
+                             <div class="col-sm-2 comment"><input data-toggle="modal" data-target=".fadeComment" class="share-btn" type="button" value="'+_blogArr[i].comment+'" onclick="Comment(\'' + _blogArr[i]._id + '\')">&nbsp;|&nbsp;<span>分享</span></div> \
+                    </div> ';
+                blogData[i]=_arr;
+            }
+            return blogData;
+        }
+
+        //渲染数据
+        function renderTable(blogSet) {
+            $('#blogExample').DataTable( {
+                data:blogSet,
+                columns: [
+                    {title:""},
+                ]
+            } );
+        }
+
+    </script>
+{{/section}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
